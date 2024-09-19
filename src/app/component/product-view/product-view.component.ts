@@ -20,5 +20,12 @@ export class ProductViewComponent implements OnInit {
       console.log(res)
     })
   }
+  addtocart(item:product){
+    this._api.addtocart(item);
 
+  }
+
+  removeitem(item:product){
+    this._api.removecartitem(item);
+  }
 }
