@@ -1,0 +1,75 @@
+<ng-container  *ngIf="showproduct.length !=0">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-9">         
+          <h3>Cart Items</h3>
+          <table class="table table-hover table-borderless mt-3">
+            <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Brand</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of showproduct">
+                <td><img src="{{item.images[0]}}" style="width: 80px;"></td>
+                <td>{{item.title}}</td>
+                <td>{{item.category}}</td>
+                <td>${{item.price}}</td>
+                <td><button (click)="deleteitem(item)" class="btn btn-danger">Delete</button></td>
+              </tr>            
+            </tbody>
+          </table>
+        </div>
+
+        <!--total section-->
+        <div class="col-sm-3">
+          <h1>Total Amount:</h1><br>
+          <strong style="font-size: 35px;color: green;">${{totalamount}}</strong><br>
+          <div class="btn-group mt-3">
+            <button (click)="toggleAddressForm()" class="btn btn-primary">Checkout</button>&nbsp;
+            <button (click)="empty()" class="btn btn-secondary">Empty Cart</button>
+          </div>
+
+          <!--form for checkout-->
+          <div class="mt-3" *ngIf="addressform">
+            <form [formGroup]="myform">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" formControlName="email" placeholder="Enter Email" aria-describedby="emailHelp"> 
+              </div>
+              <div class="mb-3 form-group">
+                <label for="exampleInputPassword1" class="form-label">Name</label>
+                <input type="text" class="form-control" formControlName="name" placeholder="Enter Fullname">
+              </div>
+              <div class="mb-3 form-group">
+                <label for="exampleInputPassword1" class="form-label">Mobile Number</label>
+                <input type="number" class="form-control" formControlName="mobile" placeholder="Enter number">
+              </div>
+              <div class="form-group mb-3">
+                <label>Address</label>
+                <textarea class="form-control" formControlName="address" placeholder="Enter your Address" id="floatingTextarea2" rows="3"></textarea>
+              </div>
+              <button routerLink="/order-page" (click)="onsubmit()" [disabled]="this.myform.invalid" type="submit" class="btn btn-success mt-2">Order</button>&nbsp;
+              <button (click)="cancel()" type="submit" class="btn btn-dark mt-2">Cancel</button>
+            </form>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+</ng-container>
+
+<!--empty cart-->
+<ng-container *ngIf="showproduct.length==0">
+    <div class="card">
+      <div class="center">
+          <h4>Your Cart is Empty</h4>
+          <h6>Please Add Item</h6>
+          <button routerLink="/" class="btn btn-dark">Shop Now</button>
+      </div>
+    </div>
+</ng-container>

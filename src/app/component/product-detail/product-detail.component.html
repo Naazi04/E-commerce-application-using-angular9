@@ -14,8 +14,8 @@
             <img class="product-img img-fluid" src="{{productdata.images[0]}}">
             <div>
                 <button class="btn btn-primary">Buy Now</button> &nbsp;
-                <button (click)="addtocart()" *ngIf="showadd" class="btn btn-success">Add to cart</button>
-                <button (click)="removeitem()" *ngIf="showremove" class="btn btn-danger">Remove Item</button>
+                <button (click)="addtocart(productdata)" *ngIf="showadd" class="btn btn-success">Add to cart</button>
+                <button (click)="removeitem(productdata)" *ngIf="showremove" class="btn btn-danger">Remove Item</button>
             </div>
         </div>
    
@@ -29,7 +29,8 @@
                 <strong>Description:</strong><br>
                 <p>{{productdata?.description}}</p>
                 <p style="color: rgb(66, 111, 66);">Discount: {{productdata?.discountPercentage}}%</p><br>
-                <strong class="text-danger">Stocks: {{productdata?.stock}} Units left</strong>
+                <strong class="text-danger">Stocks: {{productdata?.stock}} Units left</strong><br>
+                <button routerLink="/" class="btn btn-warning text-light mt-2">BACK</button>
             </div>
         </div>
     </div>
