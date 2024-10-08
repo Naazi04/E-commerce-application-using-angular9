@@ -7,50 +7,65 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  public cartitemlist : any=[];
-  public productlist = new BehaviorSubject<any>([])
+  public cartitemlist: product[] = [];
+  public productlist = new BehaviorSubject<product[]>([]);
   apiURL = "https://dummyjson.com/products/";
-  constructor(private _http:HttpClient) { }
 
-  getproduct(){
-    return this._http.get<product[]>("https://dummyjson.com/products/")
+  constructor(private _http: HttpClient) {
+    this.loadCartItems(); // Load items from local storage when the service is initialized
   }
 
-  getproductbyid(id:string){
-    return this._http.get(this.apiURL+id);
+  getproduct() {
+    return this._http.get<product[]>(this.apiURL);
   }
 
-  addtocart(data:product){
-    this.cartitemlist.push(data);
-    this.productlist.next(this.cartitemlist);
-    console.log(this.cartitemlist)
+  getproductbyid(id: string) {
+    return this._http.get<product>(this.apiURL + id);
   }
 
-  products(){
+  addtocart(data: product) {
+    const exists = this.cartitemlist.some(item => item.id === data.id);
+    if (!exists) {
+      this.cartitemlist.push(data);
+      this.productlist.next(this.cartitemlist);
+      this.saveCartItems(); // Save to local storage
+    }
+    console.log(this.cartitemlist);
+  }
+
+  products() {
     return this.productlist.asObservable();
   }
 
-  removecartitem(data:product){
-    this.cartitemlist.map((a:product, index:product)=>{
-      if(data.id === a.id){
-        this.cartitemlist.splice(index,1)
-      }
-    })
-    this.productlist.next(this.cartitemlist)
+  removecartitem(data: product) {
+    this.cartitemlist = this.cartitemlist.filter(item => item.id !== data.id);
+    this.productlist.next(this.cartitemlist);
+    this.saveCartItems(); // Save to local storage
   }
 
-  //total calculation
-  calculateprice(){
-    let total = 0;
-    this.cartitemlist.map((a:any)=>{
-      total +=a.price;
-    })
-    return total;
+  getCartItems() {
+    return this.cartitemlist; // Returns the current items in the cart
   }
 
-  //remove all items
-  removeallitems(){
+  calculateprice() {
+    return this.cartitemlist.reduce((total, item) => total + item.price, 0);
+  }
+
+  removeallitems() {
     this.cartitemlist = [];
-    this.productlist.next(this.cartitemlist)
+    this.productlist.next(this.cartitemlist);
+    this.saveCartItems(); // Save to local storage
+  }
+
+  private saveCartItems() {
+    localStorage.setItem('cart', JSON.stringify(this.cartitemlist));
+  }
+
+  private loadCartItems() {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      this.cartitemlist = JSON.parse(savedCart);
+      this.productlist.next(this.cartitemlist);
+    }
   }
 }

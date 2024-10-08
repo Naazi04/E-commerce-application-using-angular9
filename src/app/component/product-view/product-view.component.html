@@ -26,17 +26,19 @@
                         </h6>
                     </div>
                     <h3 class="mb-0 font-weight-semibold">${{item.price}}</h3>
-                    <button routerLink="/product-detail/{{item.id}}" class="btn btn-dark btn-sm mt-2">
+                    <button (click)="showProductDetails(item)" class="btn btn-dark btn-sm mt-2">
                         <i class="fa-solid fa-info"></i>&nbsp;&nbsp;view details
                     </button>
-                    <button (click)="addtocart(item)" class="btn btn-warning btn-sm mt-2">
+                    <button mat-raised-button (click)="addtocart(item)" *ngIf="!isInCart(item)" class="btn btn-warning btn-sm mt-2">
                         <i class="fa fa-cart-plus mr-2"></i>&nbsp;Add to cart
                     </button>
-                    <button (click)="removeitem(item)" class="btn btn-danger btn-sm mt-2">
+                    <button (click)="removeitem(item)" *ngIf="isInCart(item)" class="btn btn-danger btn-sm mt-2">
                         <i class="fa fa-remove mr-2"></i>&nbsp;Remove
                     </button>
                 </div>
             </div>
         </div>
     </div>
+    
+    <app-product-popup></app-product-popup>
 </div>

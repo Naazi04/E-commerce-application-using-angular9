@@ -1,0 +1,12 @@
+<div class="app-product-popup" *ngIf="visible">
+    <div class="popup-content">
+        <span class="close" (click)="close()">&times;</span>
+        <h1>{{ title }}</h1>
+        <img [src]="image" alt="Product Image" class="img-fluid"/>
+        <h3>Price: ${{ price }}</h3>
+        <p><strong>Category:</strong>{{category}}</p>
+        <p><strong>Description:</strong>{{description}}</p>
+        <p><strong>Discount:</strong>{{discountPercentage}}%</p>
+        <p><strong>Stocks:</strong>{{stock}} Units left</p>
+    </div>
+</div>
