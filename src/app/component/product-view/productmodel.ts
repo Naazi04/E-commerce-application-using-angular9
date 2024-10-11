@@ -8,4 +8,5 @@ export interface product{
     images: string;
     discountPercentage: number;
     stock: number;
+    quantity?: number;
 }

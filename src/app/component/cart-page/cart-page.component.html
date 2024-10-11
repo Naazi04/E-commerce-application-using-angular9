@@ -15,10 +15,21 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of showproduct">
-                <td><img src="{{item.images[0]}}" style="width: 80px;"></td>
+                <td><img [lazyLoad]="item.images[0]" loading="lazy" class="image-placeholder" style="width: 80px;"></td>
+                <!-- [lazyLoad]="item.images[0]"
+                  alt="{{item.name}}"
+                  class="image-placeholder"
+                  loading="lazy"
+                  style="width: 80px;" -->
                 <td>{{item.title}}</td>
                 <td>{{item.category}}</td>
                 <td>${{item.price}}</td>
+                <td>
+                  <button (click)="decreaseQuantity(item)" class="btn btn-secondary btn-sm">-</button>&nbsp;
+                  <span>{{item.quantity || 1}}</span>&nbsp;
+                  <button (click)="increaseQuantity(item)" class="btn btn-secondary btn-sm">+</button>
+
+                </td>
                 <td><button (click)="deleteitem(item)" class="btn btn-danger">Delete</button></td>
               </tr>            
             </tbody>

@@ -24,14 +24,22 @@ export class ApiService {
   }
 
   addtocart(data: product) {
-    const exists = this.cartitemlist.some(item => item.id === data.id);
-    if (!exists) {
+    const index = this.cartitemlist.findIndex(item => item.id === data.id);
+    if (index === -1) { // Item does not exist
+      // Initialize quantity when adding a new item
+      data.quantity = 1; 
       this.cartitemlist.push(data);
       this.productlist.next(this.cartitemlist);
-      this.saveCartItems(); // Save to local storage
+      this.saveCartItems();
+    } else {
+      // If the item is already in the cart, increment its quantity
+      this.cartitemlist[index].quantity++; // Increment quantity for existing item
+      this.productlist.next(this.cartitemlist);
+      this.saveCartItems();
     }
-    console.log(this.cartitemlist);
   }
+  
+  
 
   products() {
     return this.productlist.asObservable();
@@ -44,7 +52,10 @@ export class ApiService {
   }
 
   getCartItems() {
-    return this.cartitemlist; // Returns the current items in the cart
+    return this.cartitemlist.map(item=> ({
+      ...item,
+      quantity: item.quantity || 1
+    })); // Returns the current items in the cart
   }
 
   calculateprice() {

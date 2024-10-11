@@ -14,6 +14,10 @@ import { ProductPopupComponent } from './component/product-popup/product-popup.c
 import { MatButtonModule } from '@angular/material/button';
 import { CartDialogComponent } from './component/cart-dialog/cart-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialog.component';
+import { LazyLoadDirective } from './lazy-load.directive';
+
+
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     CartPageComponent,
     OrderPageComponent,
     ProductPopupComponent,
-    CartDialogComponent
+    CartDialogComponent,
+    ConfirmDialogComponent,
+    LazyLoadDirective
   ],
   imports: [
     BrowserModule,

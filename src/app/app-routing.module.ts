@@ -9,7 +9,7 @@ import { OrderPageComponent } from './component/order-page/order-page.component'
 
 const routes: Routes = [
   {path:'',component:ProductViewComponent},
-  {path:'product-detail/:productid',component:ProductDetailComponent},
+  //{path:'product-detail/:productid',component:ProductDetailComponent},
   {path:'cart-page',component:CartPageComponent},
   {path:'order-page',component:OrderPageComponent}
 ];

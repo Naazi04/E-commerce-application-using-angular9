@@ -6,3 +6,8 @@
     position: absolute;
     padding: 100px;
 }
+.image-placeholder{
+    width: 100%;
+    height: auto;
+    display: block;
+}
