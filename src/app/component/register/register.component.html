@@ -1,0 +1,60 @@
+<div class="flex-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <mat-card class="login-card" appearance="outlined">
+        <mat-card-header>Register</mat-card-header>
+        <mat-card-content>
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Full Name</mat-label>
+                <input matInput formControlName="fullName" placeholder="Enter your full name" required/>
+                
+                <mat-error *ngIf="registerForm.get('fullName').hasError('required') && registerForm.get('fullName').touched">
+                  Full Name is required.
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('fullName').hasError('pattern') && registerForm.get('fullName').touched">
+                  Full Name must contain only letters and spaces.
+                </mat-error>
+              </mat-form-field>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Enter your email" required />
+            <mat-error *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
+              Email is required.
+            </mat-error>
+            <mat-error *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">
+              Invalid email format.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Enter your password" required />
+            <mat-error *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
+              Password is required.
+            </mat-error>
+            <mat-error *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
+              Password must be at least 6 characters long.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword" placeholder="Enter your password again" required />
+            <mat-error *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">
+              Confirm the Password
+            </mat-error>
+            <mat-error *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword').valid && registerForm.get('password').valid">
+              Passwords should match.
+            </mat-error>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="button-container">
+            <button mat-raised-button color="accent" type="submit" [disabled]="registerForm.invalid" class="full-width">REGISTER</button>
+          </div>
+        </mat-card-actions>
+        <mat-card-content>
+          <p>Alreay a member? <a routerLink="/login">Login</a>.</p>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </div>
+  

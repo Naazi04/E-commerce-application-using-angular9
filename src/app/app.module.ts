@@ -16,8 +16,11 @@ import { CartDialogComponent } from './component/cart-dialog/cart-dialog.compone
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './component/confirm-dialog/confirm-dialog.component';
 import { LazyLoadDirective } from './lazy-load.directive';
-
-
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { LazyLoadDirective } from './lazy-load.directive';
     ProductPopupComponent,
     CartDialogComponent,
     ConfirmDialogComponent,
-    LazyLoadDirective
+    LazyLoadDirective,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,10 @@ import { LazyLoadDirective } from './lazy-load.directive';
     FormsModule,
     MatButtonModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

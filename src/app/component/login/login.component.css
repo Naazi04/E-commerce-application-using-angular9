@@ -1,0 +1,34 @@
+.flex-container {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  height: 110vh; /* Full viewport height */
+  background-image: url('/assets/login-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-card {
+  width: 100%;
+  height: auto;
+  max-width: 450px; 
+  margin-left: 300px;
+  margin-top: 250px; 
+  background-color:rgb(238, 240, 239);
+}
+.full-width{
+  width: 100%;
+}
+a{
+  text-decoration: none;
+  color: brown;
+}
+.button-container {
+  width: 100%; 
+}
+mat-card-header{
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}

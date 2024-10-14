@@ -4,14 +4,19 @@ import { ProductViewComponent } from './component/product-view/product-view.comp
 import { ProductDetailComponent } from './component/product-detail/product-detail.component';
 import { CartPageComponent } from './component/cart-page/cart-page.component';
 import { OrderPageComponent } from './component/order-page/order-page.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
 
 
 
 const routes: Routes = [
-  {path:'',component:ProductViewComponent},
+  {path:'home',component:ProductViewComponent},
   //{path:'product-detail/:productid',component:ProductDetailComponent},
   {path:'cart-page',component:CartPageComponent},
-  {path:'order-page',component:OrderPageComponent}
+  {path:'order-page',component:OrderPageComponent},
+  {path:'login',component:LoginComponent},
+  {path:'register',component:RegisterComponent},
+  {path:'', redirectTo:'login',pathMatch:'full'}
 ];
 
 @NgModule({
